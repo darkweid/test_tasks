@@ -17,16 +17,31 @@ def strict(func):
     """
 
     @wraps(func)
-    def wrapper(*args):
-        types_of_args = map(type, args)
-        expected_types = func.__annotations__.values()
+    def wrapper(*args, **kwargs):
+        expected_types = func.__annotations__
 
-        for actual, expected in zip(types_of_args, expected_types):
-            if actual != expected:
+        # Check types for positional arguments (args)
+        for i, (actual, expected) in enumerate(zip(args, list(expected_types.values())[:len(args)])):
+            if actual.__class__ != expected:
                 raise TypeError(
-                    f"Expected argument of type {expected.__name__}, but got {actual.__name__} instead"
+                    f"Expected positional argument {i + 1} of type {expected.__name__}, "
+                    f"but got {actual.__class__.__name__} instead"
                 )
 
-        return func(*args)
+        # Check types for keyword arguments (kwargs)
+        for key, actual in kwargs.items():
+            if key in expected_types:
+                expected = expected_types[key]
+                if actual.__class__ != expected:
+                    raise TypeError(
+                        f"Expected argument '{key}' of type {expected.__name__}, "
+                        f"but got {actual.__class__.__name__} instead"
+                    )
+            else:
+                raise TypeError(
+                    f"Unexpected keyword argument '{key}'"
+                )
+
+        return func(*args, **kwargs)
 
     return wrapper
