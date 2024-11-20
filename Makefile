@@ -29,6 +29,10 @@ test_task2:
 test_task3:
 	$(PYTHON) -m unittest discover $(TASK3_DIR)
 
+# Run solution for task2
+run_task2:
+	$(PYTHON) task2/solution.py
+
 
 # Clean temporary files
 clean:
