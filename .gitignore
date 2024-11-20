@@ -1,0 +1,53 @@
+# Ignore Python bytecode files
+__pycache__/
+*.py[cod]
+
+# Ignore virtual environment directories
+# These are created when you set up a Python environment (e.g., using venv or virtualenv)
+.venv/
+env/
+venv/
+
+# Ignore the directory where pip installs dependencies
+# Can be used in case you use a different environment setup
+pip-wheel-metadata/
+
+# Ignore IDE/editor files (e.g., PyCharm, VSCode, etc.)
+.idea/
+.vscode/
+*.swp
+
+# Ignore logs
+*.log
+
+# Ignore operating system files
+.DS_Store   # macOS specific
+Thumbs.db   # Windows specific
+
+# Ignore distribution / packaging directories
+build/
+dist/
+*.egg-info/
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore test output
+.coverage
+nosetests.xml
+*.cover
+
+# Ignore dependencies directories, this can also be useful to keep a clean repo
+# for example, if you use pipenv or poetry
+Pipfile.lock
+poetry.lock
+
+# Ignore Python test files that contain test results or coverage information
+*.hypothesis/
+
+# Ignore temporary files
+*.bak
+*.tmp
+
+# Ignore sensitive files like credentials
+.env
